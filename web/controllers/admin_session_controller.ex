@@ -1,6 +1,6 @@
-defmodule HelloPhoenix.AdminController do
+defmodule HelloPhoenix.AdminSessionController do
   use HelloPhoenix.Web, :controller
-  alias HelloPhoenix.User
+  alias HelloPhoenix.Admin
   require Logger
 
   def new(conn, _params) do
@@ -11,17 +11,17 @@ defmodule HelloPhoenix.AdminController do
     Logger.warn "params: #{inspect params}"
     username = params["session"]["username"]
     password = params["session"]["password"]
-    u = Repo.one(from u in User, where: u.username == ^username)
-    Logger.warn "user: #{inspect u}"
-    if u != nil and User.checkpw(password, u.encrypted_password) do
-      url = case get_session(conn, "user_return_to") do
+    u = Repo.one(from u in Admin, where: u.username == ^username)
+    Logger.warn "admin: #{inspect u}"
+    if u != nil and Admin.checkpw(password, u.encrypted_password) do
+      url = case get_session(conn, "admin_return_to") do
         nil -> "/"
         value -> value
       end
       conn
       |> PlugAuth.Authentication.Database.create_login(u, :name)
       |> put_flash(:notice, "Signed in successfully.")
-      |> put_session("user_return_to", nil)
+      |> put_session("admin_return_to", nil)
       |> redirect(to: url)
     else
       render(conn, :new, [username: username])
@@ -30,13 +30,13 @@ defmodule HelloPhoenix.AdminController do
 
   def destroy(conn, _params) do
     PlugAuth.Authentication.Database.delete_login(conn)
-    |> redirect(to: session_path(conn, :new))
+    |> redirect(to: admin_session_path(conn, :new))
   end
 
   def login_callback(conn) do
     conn
     |> put_layout({HelloPhoenix.LayoutView, "app.html"})
-    |> put_view(HelloPhoenix.AdminView)
+    |> put_view(HelloPhoenix.AdminSessionView)
     |> render("new.html", username: "")
     |> halt
   end

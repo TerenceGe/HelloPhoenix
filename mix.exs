@@ -37,7 +37,9 @@ defmodule HelloPhoenix.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
+     {:comeonin, "~> 2.1.0"},
      {:cowboy, "~> 1.0"},
+     {:phoenix_haml, "~> 0.2"},
      {:ex_admin, github: "smpallen99/ex_admin"},
      {:plug_auth, github: "smpallen99/plug_auth"}]
   end

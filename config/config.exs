@@ -9,6 +9,9 @@ use Mix.Config
 config :hello_phoenix,
   ecto_repos: [HelloPhoenix.Repo]
 
+config :phoenix, :template_engines,
+  haml: PhoenixHaml.Engine
+  
 # Configures the endpoint
 config :hello_phoenix, HelloPhoenix.Endpoint,
   url: [host: "localhost"],
