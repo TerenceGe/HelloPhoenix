@@ -21,12 +21,6 @@ defmodule HelloPhoenix.Router do
     plug :fetch_flash
   end
 
-  scope "/", HelloPhoenix do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-  end
-
   scope "/admin", ExAdmin do
     pipe_through :browser
     admin_routes
@@ -42,7 +36,7 @@ defmodule HelloPhoenix.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", HelloPhoenix do
-  #   pipe_through :api
-  # end
+  scope "/api", HelloPhoenix do
+    pipe_through :api
+  end
 end

@@ -15,7 +15,7 @@ defmodule HelloPhoenix.AdminSessionController do
     Logger.warn "admin: #{inspect u}"
     if u != nil and Admin.checkpw(password, u.encrypted_password) do
       url = case get_session(conn, "admin_return_to") do
-        nil -> "/"
+        nil -> "/admin"
         value -> value
       end
       conn

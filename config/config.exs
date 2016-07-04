@@ -11,7 +11,7 @@ config :hello_phoenix,
 
 config :phoenix, :template_engines,
   haml: PhoenixHaml.Engine
-  
+
 # Configures the endpoint
 config :hello_phoenix, HelloPhoenix.Endpoint,
   url: [host: "localhost"],
@@ -29,8 +29,7 @@ config :ex_admin,
   repo: HelloPhoenix.Repo,
   module: HelloPhoenix,
   modules: [
-    HelloPhoenix.ExAdmin.Dashboard,
-    HelloPhoenix.ExAdmin.User
+    HelloPhoenix.ExAdmin.Dashboard
   ]
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
